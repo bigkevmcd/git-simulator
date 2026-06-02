@@ -21,7 +21,10 @@ type ManualClock struct {
 
 // NewManualClock creates a ManualClock set to t.
 func NewManualClock(t time.Time) *ManualClock {
-	return &ManualClock{now: make(chan time.Time, 1)}
+	mc := &ManualClock{now: make(chan time.Time, 1)}
+	mc.Set(t)
+
+	return mc
 }
 
 func (m *ManualClock) Now() time.Time {
