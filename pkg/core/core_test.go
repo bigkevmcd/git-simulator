@@ -52,14 +52,21 @@ func TestRealClockSanity(t *testing.T) {
 func TestManualClockSet(t *testing.T) {
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := NewManualClock(base)
-	mc.Set(base)
+	got := mc.Now()
+	if !got.Equal(base) {
+		t.Fatalf("NewManualClock(%v).Now() = %v, want %v", base, got, base)
+	}
 
-	if got := mc.Now(); !got.Equal(base) {
-		t.Fatalf("want %v got %v", base, got)
+	later := base.Add(10 * time.Minute)
+
+	mc.Set(later)
+
+	if got := mc.Now(); !got.Equal(later) {
+		t.Fatalf("want %v got %v", later, got)
 	}
 	mc.Advance(time.Hour)
-	if got := mc.Now(); !got.Equal(base.Add(time.Hour)) {
-		t.Fatalf("after Advance want %v got %v", base.Add(time.Hour), got)
+	if got := mc.Now(); !got.Equal(later.Add(time.Hour)) {
+		t.Fatalf("after Advance want %v got %v", later.Add(time.Hour), got)
 	}
 }
 
