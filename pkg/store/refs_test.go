@@ -10,7 +10,6 @@ import (
 func TestBranchStateResolve_ImmediateNoPromotion(t *testing.T) {
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := core.NewManualClock(base)
-	mc.Set(base)
 
 	bs := &branchState{visibleSHA: "aaa"}
 	sha, promoted := bs.resolve(mc)
@@ -22,7 +21,6 @@ func TestBranchStateResolve_ImmediateNoPromotion(t *testing.T) {
 func TestBranchStateResolve_PendingNotYetDue(t *testing.T) {
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := core.NewManualClock(base)
-	mc.Set(base)
 
 	bs := &branchState{
 		visibleSHA: "aaa",
@@ -43,7 +41,6 @@ func TestBranchStateResolve_PendingNotYetDue(t *testing.T) {
 func TestBranchStateResolve_PendingDue(t *testing.T) {
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := core.NewManualClock(base)
-	mc.Set(base)
 
 	bs := &branchState{
 		visibleSHA: "aaa",

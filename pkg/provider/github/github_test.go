@@ -177,8 +177,7 @@ func TestCommitsAPI_ReturnsSHA(t *testing.T) {
 	t.Cleanup(srv.Close)
 
 	host := strings.TrimPrefix(srv.URL, "http://")
-	mc := core.NewManualClock(time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC))
-	mc.Set(mc.Now())
+	mc := core.NewManualClock(time.Now())
 	s := store.New(mc, core.NewStaticContent(map[string][]byte{"README.md": []byte("hi")}))
 	r, _ := s.CreateRepo(host, "acme", "widget", "main")
 	expectedSHA, _ := r.VisibleCommit("main")
@@ -221,8 +220,7 @@ func TestCommitsAPI_NotFound(t *testing.T) {
 	t.Cleanup(srv.Close)
 
 	host := strings.TrimPrefix(srv.URL, "http://")
-	mc := core.NewManualClock(time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC))
-	mc.Set(mc.Now())
+	mc := core.NewManualClock(time.Now())
 	s := store.New(mc, core.NewStaticContent(map[string][]byte{}))
 
 	github.Provider{}.APIRoutes(mux, s)

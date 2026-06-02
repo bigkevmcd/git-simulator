@@ -23,7 +23,6 @@ func newTestStore(t *testing.T) *store.Store {
 	t.Helper()
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := core.NewManualClock(base)
-	mc.Set(base)
 	content := core.NewStaticContent(staticFiles)
 	return store.New(mc, content)
 }
@@ -32,7 +31,6 @@ func newTestStoreWithClock(t *testing.T) (*store.Store, *core.ManualClock) {
 	t.Helper()
 	base := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
 	mc := core.NewManualClock(base)
-	mc.Set(base)
 	content := core.NewStaticContent(staticFiles)
 	return store.New(mc, content), mc
 }

@@ -175,7 +175,6 @@ func TestSendBatch_ManualClock_BlocksUntilAdvanced(t *testing.T) {
 	srv, arrived := pushAfterServer(t)
 
 	clock := core.NewManualClock(time.Unix(1_000_000, 0))
-	clock.Set(time.Unix(1_000_000, 0))
 	e := emitter.New(clock)
 
 	const delay = 100 * time.Millisecond

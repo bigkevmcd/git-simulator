@@ -47,7 +47,6 @@ func TestSDK_RaceCondition(t *testing.T) {
 
 	t0 := time.Unix(1_000_000, 0)
 	clock := core.NewManualClock(t0)
-	clock.Set(t0)
 
 	sim := gitsim.New(
 		gitsim.WithClock(clock),
